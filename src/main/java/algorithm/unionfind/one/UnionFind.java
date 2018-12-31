@@ -31,96 +31,26 @@ public class UnionFind {
 		this.rows = rows;
 		this.columns = columns;
 		this.total = rows*columns;
-		this.mainList = new ArrayList();
+		this.mainList = new ArrayList<int[]>();
 		
 		System.out.println("ROWS: "+rows+" COLS: "+columns);
 		
 		this.askQuestion();
 	}
 	
-	public boolean isBordered(int n1, int n2) {
-		
-		int[] borders = {
-				 n1 - this.columns - 1,
-				 n1 - this.columns,
-				 n1 - this.columns + 1,
-				 n1 - 1,
-				 n1 + 1,
-				 n1 + this.columns - 1,
-				 n1 + this.columns,
-				 n1 + this.columns + 1
-		};
-		
-		for(int border: borders) {
-			if( border == n2) {
-				return true;
-			}
-		}
-		
-		return false;
-	}
-	public int[] getList(int n) {
-		int[] doesNotExist = {-1};
-		for(int i=0; i < mainList.size(); i++) {
-			for(int j=0; j<mainList.get(i).length; i++) {
-				if(mainList.get(i)[j] == n) {
-					return mainList.get(i);
-				}
-			}
-		}
-		return doesNotExist;
-	}
 	
 	public int getListIndex(int n) {
 		int doesNotExist = -1;
-		for(int i=0; i < mainList.size(); i++) {
-			for(int j=0; j<mainList.get(i).length; i++) {
-				if(mainList.get(i)[j] == n) {
-					return i;
+		for(int i=0; i < this.mainList.size(); i++) {
+			if(this.mainList.get(i) != null) {
+				for(int j=0; j<this.mainList.get(i).length; i++) {
+					if(this.mainList.get(i)[j] == n) {
+						return i;
+					}
 				}
 			}
 		}
 		return doesNotExist;
-	}
-	public void union(int n1, int n2) {
-		
-		if(this.isBordered(n1, n2)) {
-			//Need to add list 2;
-			//if list 1 and list 2 exist, replace both with concat
-			int[] list1 = this.getList(n1);
-			int[] list2 = this.getList(n2);
-			
-			if(list1[0] == -1 && list2[0] == -1) {
-				int[] newList = { n1, n2 };
-				this.mainList.add(newList);
-			} else if(list1[0] == -1) {
-				Helpers helpers = new Helpers();
-				int[] listForm = { n1 };
-				int[] combinedList = helpers.concatIntArr(list2, listForm);
-				int listIndex = this.getListIndex(n2);
-				
-				this.mainList.add(combinedList);
-				this.mainList.remove(listIndex);
-				
-				for(int i = 0; i<this.mainList.size(); i++) {
-					System.out.println(this.mainList.get(i));
-				}
-				
-				// Remove list2 and replace with new list which is concat of list2 
-				//and n1
-			} else if(list2[0] == -1) {
-				
-			} else {
-				//concatboth
-			}
-			System.out.println("DO");
-			
-		}
-		else {
-			System.out.println("DO NOT DO");
-		}
-		
-		this.askQuestion();
 	}
 	
 	public void askQuestion() {
@@ -134,11 +64,11 @@ public class UnionFind {
 		int n2 = scanner.nextInt();
 		
 		if(choice.equals("Union")) {
-			this.union(n1,n2);
+			new Union(this.rows,this.columns, n1, n2);
 		}
 		
 		else if(choice.equals("Connection")) {
-			
+			new Connection(this.rows,this.columns, n1, n2);
 		}
 	}
 	
