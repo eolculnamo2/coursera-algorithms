@@ -1,6 +1,7 @@
 package algorithm.unionfind.one;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 import algoriths.helpers.Helpers;
@@ -25,7 +26,7 @@ public class UnionFind {
 	protected int rows;
 	protected int columns;
 	protected int total;
-	protected ArrayList<int[]> mainList;
+	protected List<int[]> mainList;
 	
 	public UnionFind(int rows, int columns) {
 		this.rows = rows;
