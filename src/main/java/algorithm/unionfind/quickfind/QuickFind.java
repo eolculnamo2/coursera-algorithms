@@ -1,6 +1,9 @@
 package algorithm.unionfind.quickfind;
 
+import java.util.Map;
 import java.util.Scanner;
+
+import algoriths.helpers.Helpers;
 
 public class QuickFind {
 	//will add protected if subclass is needed.
@@ -51,14 +54,11 @@ public class QuickFind {
 	
 	void askQuestion() {
 		
-		System.out.println("Union or Connection?");
-		Scanner scanner = new Scanner(System.in);
-		String choice = scanner.next();
-		
-		System.out.println("Enter Number 1");
-		int n1 = scanner.nextInt();
-		System.out.println("Enter Number 2");
-		int n2 = scanner.nextInt();
+		Helpers helpers = new Helpers();
+		Map q = helpers.provideQuestions();
+		String choice = (String) q.get("choice");
+		int n1 = (Integer) q.get("n1");
+		int n2 = (Integer) q.get("n2");
 		
 		if(choice.equals("Union")) {
 			this.union(n1, n2);

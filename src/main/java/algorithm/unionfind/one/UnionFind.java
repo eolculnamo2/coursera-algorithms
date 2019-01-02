@@ -2,6 +2,7 @@ package algorithm.unionfind.one;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 
 import algoriths.helpers.Helpers;
@@ -55,19 +56,16 @@ public class UnionFind {
 	}
 	
 	public void askQuestion() {
-		System.out.println("Enter 'Union' or 'Connection'");
-		Scanner scanner = new Scanner(System.in);
-		String choice = scanner.next();
 		
-		System.out.println("Enter number 1");
-		int n1 = scanner.nextInt();
-		System.out.println("Enter number 2");
-		int n2 = scanner.nextInt();
+		Helpers helpers = new Helpers();
+		Map q = helpers.provideQuestions();
+		String choice = (String) q.get("choice");
+		int n1 = (Integer) q.get("n1");
+		int n2 = (Integer) q.get("n2");
 		
 		if(choice.equals("Union")) {
 			new Union(this.rows,this.columns, n1, n2);
 		}
-		
 		else if(choice.equals("Connection")) {
 			new Connection(this.rows,this.columns, n1, n2);
 		}
